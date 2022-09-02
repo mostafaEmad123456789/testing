@@ -1,0 +1,51 @@
+version: 2.1
+
+commands:
+  print_pipeline_id:
+    description: "First Command"
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+
+jobs: 
+  
+  get_id:
+    docker: 
+      - image: "circleci/node:13.8.0"
+    steps: 
+      - print_pipeline_id
+      - run: 
+          command: "echo 'Failes......'"
+          name: "On failure test"
+          when: on_fail
+
+  save-text: 
+    docker: 
+      - image: "circleci/node:13.8.0"
+    steps: 
+      - run: 
+          command: "echo 'Hello Doods' > txt_output.txt"
+          name: "Save Text In a File"
+      - persist_to_workspace: 
+          root: .
+          paths: .
+
+
+  get-text: 
+    docker: 
+      - image: "circleci/node:13.8.0"
+    steps: 
+      - attach_workspace: 
+          at: .
+      - run: 
+          command: "cat txt_output.txt"
+          name: "Get Text From a File"
+
+
+workflows: 
+  save-text-workflow: 
+    jobs: 
+      - get_id
+      - save-text
+      - get-text: 
+          requires: 
+            - save-text
