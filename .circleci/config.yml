@@ -7,7 +7,7 @@ jobs:
     steps:
       - run:
           name: "Say World"
-          command: "echo 'World, $NAME'"
+          command: "echo 'World, {{ .Environment.NAME }}'"
   
   say-hello:
     docker:
