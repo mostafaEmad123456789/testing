@@ -13,8 +13,8 @@ jobs:
           name: "Save Text In a File"
       - 
         persist_to_workspace: 
-          paths: /tmp
           root: /tmp
+          paths: /tmp
 
 
   get-text: 
