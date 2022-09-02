@@ -31,12 +31,12 @@ jobs:
 
 
 workflows: 
-  save-text-workflow: 
+  CI-Pipline-workflow: 
     jobs: 
       - compile
       - test:
           requires: 
-            - save-text
+            - compile
       - analyze: 
           requires: 
-            - save-text
+            - test
