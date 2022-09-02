@@ -17,7 +17,7 @@ jobs:
     steps:
       - run:
           name: "Say hello"
-          command: "echo 'Hello $NAME'"
+          command: "echo 'Hello $NAME, Welcome To CircleCI'"
 
 workflows:
   say-hello-workflow: 
