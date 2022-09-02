@@ -1,7 +1,19 @@
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    description: "First Command"
+    steps:
+      - run: "echo 'ID: $CIRCLE_WORKFLOW_ID'"
+
 jobs: 
   
+  get_id:
+    docker: 
+      - image: "circleci/node:13.8.0"
+    steps: 
+      - print_pipeline_id
+
   save-text: 
     docker: 
       - image: "circleci/node:13.8.0"
