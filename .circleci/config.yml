@@ -1,28 +1,31 @@
 version: 2.1
 
 jobs:
-  say-world:
-    environment:
-      - NAME: Mostafa
+  save-text:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run:
-          name: "Say World"
-          command: "echo 'World, $NAME'"
-  
-  say-hello:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "Say hello"
-          command: "echo 'Hello $NAME, Welcome To CircleCI'"
+          name: "Save Text In a File"
+          command: "echo 'Hello Doods' > /tmp/txt_output.txt"
+      - persist_to_workspace:
+          root: /tmp
+          paths: /tmp
 
+   get-text:
+     docker:
+       - image: circleci/node:13.8.0
+     steps:
+       - attach_workspace:
+           at: /tmp
+       - run:
+           name: "Get Text From a File"
+           command: "cat /tmp/txt_output.txt"
+  
 workflows:
-  say-hello-workflow: 
+  save-text-workflow: 
     jobs:
-      - say-hello
-      - say-world:
+      - save-text
+      - get-text:
           requires:
-            - say-hello
+            - save-text
