@@ -2,12 +2,14 @@ version: 2.1
 
 jobs:
   say-world:
+    environment:
+      - NAME: {{ .Environment.NAME }}
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run:
           name: "Say World"
-          command: "echo 'World, {{ .Environment.NAME }}'"
+          command: "echo 'World, $NAME'"
   
   say-hello:
     docker:
