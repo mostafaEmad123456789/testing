@@ -28,10 +28,10 @@ jobs:
           root: /tmp
 
 workflows: 
-  say-hello-workflow: 
+  save-text-workflow: 
     jobs: 
-      - say-hello
+      - save-text
       - 
-        say-world: 
+        get-text: 
           requires: 
-            - say-hello
+            - save-text
