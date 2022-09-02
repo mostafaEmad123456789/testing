@@ -4,29 +4,23 @@ jobs:
   
   save-text: 
     docker: 
-      - 
-        image: "circleci/node:13.8.0"
+      - image: "circleci/node:13.8.0"
     steps: 
-      - 
-        run: 
+      - run: 
           command: "echo 'Hello Doods' > txt_output.txt"
           name: "Save Text In a File"
-      - 
-        persist_to_workspace: 
+      - persist_to_workspace: 
           root: .
           paths: .
 
 
   get-text: 
     docker: 
-      - 
-        image: "circleci/node:13.8.0"
+      - image: "circleci/node:13.8.0"
     steps: 
-      - 
-        attach_workspace: 
+      - attach_workspace: 
           at: .
-      - 
-        run: 
+      - run: 
           command: "cat txt_output.txt"
           name: "Get Text From a File"
 
@@ -35,7 +29,6 @@ workflows:
   save-text-workflow: 
     jobs: 
       - save-text
-      - 
-        get-text: 
+      - get-text: 
           requires: 
             - save-text
