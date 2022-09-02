@@ -1,18 +1,7 @@
 version: 2.1
 
 jobs: 
-  get-text: 
-    docker: 
-      - 
-        image: "circleci/node:13.8.0"
-    steps: 
-      - 
-        attach_workspace: 
-          at: /tmp
-      - 
-        run: 
-          command: "cat /tmp/txt_output.txt"
-          name: "Get Text From a File"
+  
   save-text: 
     docker: 
       - 
@@ -26,6 +15,21 @@ jobs:
         persist_to_workspace: 
           paths: /tmp
           root: /tmp
+
+
+  get-text: 
+    docker: 
+      - 
+        image: "circleci/node:13.8.0"
+    steps: 
+      - 
+        attach_workspace: 
+          at: /tmp
+      - 
+        run: 
+          command: "cat /tmp/txt_output.txt"
+          name: "Get Text From a File"
+
 
 workflows: 
   save-text-workflow: 
