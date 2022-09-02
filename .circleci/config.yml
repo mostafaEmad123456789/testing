@@ -1,0 +1,28 @@
+version: 2.1
+
+jobs:
+  say-world:
+    environment:
+      - NAME: Mostafa
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "Say World"
+          command: "echo $NAME"
+  
+  say-hello:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "Say hello"
+          command: "echo 'Hello $NAME'"
+
+workflows:
+  say-hello-workflow: 
+    jobs:
+      - say-hello
+      - say-world:
+          requires:
+            - say-hello
