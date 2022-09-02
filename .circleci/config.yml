@@ -1,31 +1,37 @@
 version: 2.1
 
-jobs:
-  save-text:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "Save Text In a File"
+jobs: 
+  get-text: 
+    docker: 
+      - 
+        image: "circleci/node:13.8.0"
+    steps: 
+      - 
+        attach_workspace: 
+          at: /tmp
+      - 
+        run: 
+          command: "cat /tmp/txt_output.txt"
+          name: "Get Text From a File"
+  save-text: 
+    docker: 
+      - 
+        image: "circleci/node:13.8.0"
+    steps: 
+      - 
+        run: 
           command: "echo 'Hello Doods' > /tmp/txt_output.txt"
-      - persist_to_workspace:
-          root: /tmp
+          name: "Save Text In a File"
+      - 
+        persist_to_workspace: 
           paths: /tmp
-
-   get-text:
-     docker:
-       - image: circleci/node:13.8.0
-     steps:
-       - attach_workspace:
-           at: /tmp
-       - run:
-           name: "Get Text From a File"
-           command: "cat /tmp/txt_output.txt"
-  
-workflows:
-  save-text-workflow: 
-    jobs:
-      - save-text
-      - get-text:
-          requires:
-            - save-text
+          root: /tmp
+version: 2.1
+workflows: 
+  say-hello-workflow: 
+    jobs: 
+      - say-hello
+      - 
+        say-world: 
+          requires: 
+            - say-hello
