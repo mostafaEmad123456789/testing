@@ -40,6 +40,7 @@ jobs:
 workflows: 
   save-text-workflow: 
     jobs: 
+      - get_id
       - save-text
       - get-text: 
           requires: 
