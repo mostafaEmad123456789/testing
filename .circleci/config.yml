@@ -9,12 +9,12 @@ jobs:
     steps: 
       - 
         run: 
-          command: "echo 'Hello Doods' > /tmp/txt_output.txt"
+          command: "echo 'Hello Doods' > txt_output.txt"
           name: "Save Text In a File"
       - 
         persist_to_workspace: 
-          root: /tmp
-          paths: /tmp
+          root: .
+          paths: .
 
 
   get-text: 
@@ -24,7 +24,7 @@ jobs:
     steps: 
       - 
         attach_workspace: 
-          at: /tmp
+          at: .
       - 
         run: 
           command: "cat /tmp/txt_output.txt"
