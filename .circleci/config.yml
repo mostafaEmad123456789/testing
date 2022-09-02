@@ -26,7 +26,7 @@ jobs:
         persist_to_workspace: 
           paths: /tmp
           root: /tmp
-version: 2.1
+
 workflows: 
   say-hello-workflow: 
     jobs: 
